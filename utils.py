@@ -37,7 +37,6 @@ def extract_features_cached(filepath):
         print_step("Loading audio file...", 3)
         y, sr = librosa.load(full_path, sr=22050, duration=30)
 
-        # ===== New Comprehensive Feature Extraction =====
         print_step("Extracting comprehensive features...", 3)
         features = {
             # Spectral/Timbre
@@ -61,7 +60,6 @@ def extract_features_cached(filepath):
             else [feat]  # For scalar values like tempo
             for feat in features.values()
         ])
-        # ===== End of New Extraction =====
         
         print_step(f"Caching features to {cache_path}", 3)
         np.save(cache_path, feature_vector)
@@ -194,7 +192,7 @@ def prepare_dataset(df, label_column, mlb=None, scaler=None):
     X = np.array([f for f in features if f is not None])
     print_step(f"Retained {len(X)}/{len(features)} valid feature sets", 2)
     
-    # # ===== CACHE CLEANING HERE =====
+    # Uncomment for Cache Cleaning
     # print_step("Cleaning invalid cache entries...", 2)
     # valid_paths = set(df['PATH'].apply(lambda x: x.replace('/', '__')))  # Match cache naming
     # for f in os.listdir(FEATURE_DIR):
@@ -205,7 +203,6 @@ def prepare_dataset(df, label_column, mlb=None, scaler=None):
     #             print_step(f"Couldn't remove {f}: {str(e)}", 3)
     
     # print_step(f"Cache cleanup complete ({FEATURE_DIR})", 2)
-    # # ===== END CLEANUP =====
 
     print_step("Preparing labels...", 2)
     y_raw = df[label_column].values[valid]
@@ -224,7 +221,7 @@ def prepare_dataset(df, label_column, mlb=None, scaler=None):
         y = mlb.transform(y_raw)
         print_step("Used provided MultiLabelBinarizer", 2)
 
-    # === Scaling ===
+    # Scaling
     if scaler is None:
         scaler = StandardScaler()
         X_scaled = scaler.fit_transform(X)
@@ -254,11 +251,8 @@ def infer_main_genres(row):
         else:
             unmapped_subgenres.add(g)  # Track but don't include
     
-    # REMOVED THE FALLBACK TO row['genres']
     return list(main_genres), unmapped_subgenres
-
-# utils.py
-
+    
 def compute_balanced_weights(class_freqs, smoothing=0.15):
     inv_freq = {k: 1 / (v + 1e-6) for k, v in class_freqs.items()}
     max_inv = max(inv_freq.values())
