@@ -2,5 +2,12 @@ numpy
 pandas
 librosa
 scikit-learn
-tensorflow
 joblib
+gdown
+iterative-stratification
+matplotlib
+psutil
+tabulate
+torch
+datetime
+tqdm
