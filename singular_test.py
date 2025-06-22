@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler, MultiLabelBinarizer
 import torch.nn as nn
 import torch.nn.functional as F
 
-# Adjust these paths to your saved files
+# Saved files
 MOOD_MODEL_PATH = 'data/bestMood/mood_model.pt'
 MOOD_MLB_PATH = 'data/bestMood/mlb_mood.pkl'
 MOOD_SCALER_PATH = 'data/bestMood/scaler_mood.pkl'
@@ -19,7 +19,6 @@ GENRE_THRESHOLDS_PATH = 'data/bestGenre/genre_thresholds.pkl'
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-# Your MoodClassifier and MusicGenreModel classes here (import or define)
 class MoodClassifier(nn.Module):
     def __init__(self, input_dim, num_classes):
         super().__init__()
@@ -86,7 +85,6 @@ class MusicGenreModel(nn.Module):
 
 
 def extract_features(filepath):
-    # Replicate your feature extraction exactly here
     y, sr = librosa.load(filepath, sr=22050, duration=30)
     
     features = {
