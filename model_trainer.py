@@ -242,7 +242,4 @@ def train_model(X, y, mlb, model_path, mlb_path, scaler_path=None, scaler=None):
 
 
 if __name__ == "__main__":
-    # Example usage (replace with your actual data loading):
-    # X, y, mlb, scaler = load_your_data_and_mlb()
-    # train_model(X, y, mlb, 'data/genre_model.pt', 'data/mlb.pkl', 'data/scaler.pkl', scaler)
     pass
