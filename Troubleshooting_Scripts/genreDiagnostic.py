@@ -29,17 +29,17 @@ def diagnostic_report_torch(model, X_tensor, y_np, mlb, class_weights=None, thre
                 found_bias = True
                 break
         if not found_bias:
-            print("\n❗ Final layer biases not found or do not match expected dimensions.")
+            print("\n Final layer biases not found or do not match expected dimensions.")
     except Exception as e:
-        print(f"\n⚠ Error accessing final layer biases: {e}")
+        print(f"\n Error accessing final layer biases: {e}")
 
     # 4. Class weights
     if class_weights is not None:
-        print("\n⚖️ Class weights:")
+        print("\n Class weights:")
         for genre, weight in zip(mlb.classes_, class_weights):
             print(f"  {genre:15s}: {weight:.2f}")
     else:
-        print("\n⚠️ No class weights provided.")
+        print("\n No class weights provided.")
 
     # 5. Sample raw predictions
     print("\n\U0001F4C8 Sample raw predictions (first 3 samples):")
@@ -67,4 +67,4 @@ def diagnostic_report_torch(model, X_tensor, y_np, mlb, class_weights=None, thre
     report = classification_report(y_true_small, y_pred_bin, target_names=mlb.classes_, zero_division=0, digits=3)
     print(report)
 
-    print("\n=== ✅ End of Diagnostic Report ===")
+    print("\n=== End of Diagnostic Report ===")
