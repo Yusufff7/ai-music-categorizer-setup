@@ -64,4 +64,4 @@ if __name__ == "__main__":
     for i in range(1, 11):  # model_1 to model_10
         evaluate_model(i, df, output_path)
 
-    print(f"\n✅ All model reports written to {output_path}")
+    print(f"\nAll model reports written to {output_path}")
