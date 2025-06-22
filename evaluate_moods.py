@@ -3,7 +3,7 @@ import torch
 import numpy as np
 import pandas as pd
 from sklearn.metrics import classification_report
-from mood_trainer import MoodClassifier  # your mood model
+from mood_trainer import MoodClassifier
 from utils import load_dataframe, prepare_dataset
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
