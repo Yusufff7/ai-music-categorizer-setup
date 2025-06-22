@@ -14,7 +14,7 @@ def evaluate_model(model_idx, df, report_file):
     model_path = f'data/ensemble_models/model_{model_idx}.pt'
     mlb_path = f'data/ensemble_models/mlb_{model_idx}.pkl'
     scaler_path = f'data/ensemble_models/scaler_{model_idx}.pkl'
-    thresholds_path = f'data/ensemble_models/genre_thresholds.pkl'  # Shared
+    thresholds_path = f'data/ensemble_models/genre_thresholds.pkl' 
 
     print(f"Evaluating model {model_idx}...")
 
