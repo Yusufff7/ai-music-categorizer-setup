@@ -5,7 +5,7 @@ os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 from utils import load_dataframe, prepare_dataset
-from mood_trainer import train_model  # assumes mood trainer is named model_trainer_mood.py
+from mood_trainer import train_model  
 
 def main():
     df = load_dataframe(tag_type='mood')
