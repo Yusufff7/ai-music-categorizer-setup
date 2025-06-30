@@ -135,7 +135,6 @@ def predict(filepath):
         mood_probs = torch.softmax(mood_outputs, dim=1).cpu().numpy()
     mood_pred_idx = np.argmax(mood_probs, axis=1)[0]
     mood_pred = mood_mlb.classes_[mood_pred_idx]
-    print(f"Predicted Mood: {mood_pred}")
 
     # Prepare genre prediction
     genre_X = genre_scaler.transform(feat)
@@ -150,14 +149,20 @@ def predict(filepath):
     predicted_genres = [genre for genre, prob in zip(genre_mlb.classes_, genre_probs) 
                         if prob >= genre_thresholds.get(genre, 0.5)]
 
-    print(f"Predicted Genres: {predicted_genres}")
+    return predicted_genres, mood_pred
 
 if __name__ == "__main__":
     import sys
+    import json
+
     if len(sys.argv) < 2:
-        print("Usage: python predict_single.py <audio_file>")
+        print(json.dumps({"error": "No audio file provided"}))
         sys.exit(1)
 
     audio_file = sys.argv[1]
-    print(f"Running prediction for: {audio_file}")
-    predict(audio_file)
+    try:
+        genres, mood = predict(audio_file)
+        print(json.dumps({"genres": genres, "mood": mood}))
+    except Exception as e:
+        print(json.dumps({"error": str(e)}))
+        sys.exit(1)
