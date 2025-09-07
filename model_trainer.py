@@ -62,7 +62,7 @@ class MusicGenreModel(nn.Module):
 class WeightedBCELoss(nn.Module):
     def __init__(self, weights=None):
         super().__init__()
-        self.weights = weights  # tensor shape [num_classes]
+        self.weights = weights  
 
     def forward(self, y_pred, y_true):
         loss = F.binary_cross_entropy(y_pred, y_true, reduction='none')
@@ -221,8 +221,6 @@ def train_model(X, y, mlb, model_path, mlb_path, scaler_path=None, scaler=None):
             if patience_counter >= patience:
                 print("Early stopping triggered.")
                 break
-
-        # Optionally adjust LR on plateau here with scheduler
 
     print("\nLoading best model for threshold tuning...")
     model.load_state_dict(torch.load(model_path))
