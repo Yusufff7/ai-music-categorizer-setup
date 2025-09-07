@@ -1,0 +1,1 @@
+The models that have been developed with this code are NOT included. This is simply the setup through which you can train those models yourself. Code was developed to utilize the MTG Jamendo dataset and labeling structure. 
